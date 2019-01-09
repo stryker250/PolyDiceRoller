@@ -18,27 +18,27 @@ def Menu():
         if x == '1':
             print()
             DicePool.StoreDiceToRoll(PassingList())
-            input('Press any key to Continue')
+            input('Press Enter to Continue')
         elif x == '2':
             print()
             DicePool.print_pool(PassingList())
-            input('Press any key to Continue')
+            input('Press Enter to Continue')
         elif x == '3':
             print()
             RollTheDice(PassingList())
-            input('Press any key to Continue')
+            input('Press Enter to Continue')
         elif x == '4':
             print()
             DicePool.print_history(PassingList())
-            input('Press any key to Continue')
+            input('Press Enter to Continue')
         elif x == '5':
             print()
             DicePool.ClearDicePool(True)
-            input('Press any key to Continue')
+            input('Press Enter to Continue')
         elif x == '6':
             print()
             DicePool.ClearHistory(True)
-            input('Press any key to Continue')
+            input('Press Enter to Continue')
         elif x == '9':
             print()
             break

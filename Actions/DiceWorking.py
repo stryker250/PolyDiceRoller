@@ -1,12 +1,13 @@
 #!/usr/bin/env python3
 # Copyright 2019 RaptorRants
-
+from itertools import groupby
+from operator import itemgetter
 #  Global Variables
 DiceMainS = [] #  Global variable used to keep DiceSize state while not cleared
 DiceMainC = [] #  Global variable used to keep DiceCount state while not cleared
 RollHistory = [] #  Global variable used to keep Dthe history of rolls
 # RollHistory data format: [DiceType, Roll Result, The Roll Count (ie roll 1 / roll 2 etc), the set count (ie: Roll set 1 would be the first dice or die rolled)]
-SetCount = 1 #  used to itterate the set counts while roll history is not cleared
+SetCount = 0 #  used to itterate the set counts while roll history is not cleared
 
 
 
@@ -78,9 +79,16 @@ class DicePool(Dice):#  Innitiates Dice class to DicePool to allow use of the va
             print(f'{i}d{v}')
 
     def print_history(self):
-        for i, v, c, x in self.DiceHist():
-            print(f'Set{x}: d{i}, roll {c}: {v}')
-        print()
+        print(*self.DiceHist())
+        for key, group in groupby(self.DiceHist(), key=itemgetter(1)):
+            print()
+            print(f'Starting with set {key}:')
+            print()
+            for item in group:
+                unpack_item0 =[item[0]]
+                for a, b, c in unpack_item0:
+                    print(f'd{a} roll {c} result: {b}')
+
 
     def ClearDicePool(self):
             del DiceMainC[:]
@@ -103,7 +111,7 @@ def RollTheDice(o):
                         while dCount >= count:
                                 RollValue = randint(1, dType)
                                 print(f'Roll {count} : {RollValue}')
-                                varHist = [dType, RollValue, count, SetCount]
+                                varHist = [[dType, RollValue, count], SetCount+1]
                                 RollHistory.append(varHist)
                                 count += 1
                         print()
