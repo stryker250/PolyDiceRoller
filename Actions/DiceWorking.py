@@ -5,6 +5,8 @@ DiceMainS = []
 DiceMainC = []
 RollHistory = []
 SetCount = 1
+#Global Variables
+
 
 
 class Dice:
