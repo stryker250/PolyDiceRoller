@@ -17,3 +17,4 @@ Features to be added:
 *Proper value input checking (Including checking if the dice type specified exists).  
 *Anything else that may be useful.  
   
+Feel Free to use but if you copy my code please credit and link to this code. 
