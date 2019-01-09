@@ -16,5 +16,3 @@ Features to be added:
 *Add modifiers to rolls.  
 *Proper value input checking (Including checking if the dice type specified exists).  
 *Anything else that may be useful.  
-  
-Feel Free to use but if you copy my code please credit and link to this code. 
