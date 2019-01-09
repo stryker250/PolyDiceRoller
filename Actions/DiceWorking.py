@@ -96,25 +96,27 @@ class DicePool(Dice):#  Innitiates Dice class to DicePool to allow use of the va
 
     def ClearHistory(self):
             del RollHistory[:]
+            global SetCount
+            SetCount = 0
             print('Cleared the Roll History.')
 
 
 #  Action to Roll stored Dice
 def RollTheDice(o):
-                global SetCount #  Sets the SetCount to the Global Variable (Starts as 1)
-                from random import randint
-                for dCount, dType in zip(o.DiceAmount(), o.DiceType()):#  sets the function variables for the amount of rolls and dice size from DiceAmount and DiceType from Class Dice()
-                        print(f'Rolling for {dCount}d{dType}')
-                        count = 1
-                        #total = 0
-                        while dCount >= count:
-                                RollValue = randint(1, dType)
-                                print(f'Roll {count} : {RollValue}')
-                                varHist = [[dType, RollValue, count], SetCount+1]
-                                RollHistory.append(varHist)
-                                count += 1
-                        print()
-                SetCount += 1 #  Increases Setcount by 1 when the roll is finished to increase the value of the next set count. 
+    global SetCount #  Sets the SetCount to the Global Variable (Starts as 1)
+    from random import randint
+    for dCount, dType in zip(o.DiceAmount(), o.DiceType()):#  sets the function variables for the amount of rolls and dice size from DiceAmount and DiceType from Class Dice()
+            print(f'Rolling for {dCount}d{dType}')
+            count = 1
+            #total = 0
+            while dCount >= count:
+                    RollValue = randint(1, dType)
+                    print(f'Roll {count} : {RollValue}')
+                    varHist = [[dType, RollValue, count], SetCount+1]
+                    RollHistory.append(varHist)
+                    count += 1
+            print()
+    SetCount += 1 #  Increases Setcount by 1 when the roll is finished to increase the value of the next set count. 
 
 
 #  Call this to pass Dice details and set their types as per class - Dice().
