@@ -39,6 +39,9 @@ def Menu():
             print()
             DicePool.ClearHistory(True)
             input('Press any key to Continue')
+        elif x == '9':
+            print()
+            break
         else:
             print()
             print('Please choose a valid option')

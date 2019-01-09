@@ -1,14 +1,15 @@
 #!/usr/bin/env python3
 # Copyright 2019 RaptorRants
 
-DiceMainS = []
-DiceMainC = []
-RollHistory = []
-SetCount = 1
 #  Global Variables
+DiceMainS = [] #  Global variable used to keep DiceSize state while not cleared
+DiceMainC = [] #  Global variable used to keep DiceCount state while not cleared
+RollHistory = [] #  Global variable used to keep Dthe history of rolls
+SetCount = 1 #  used to itterate the set counts while roll history is not cleared
 
 
 
+#  Innitiates Dice variable details such as Dice Size, Amount of Dice and the history of the dice
 class Dice:
     def __init__(self, **kwargs):
         if 'DiceType' in kwargs:
@@ -42,8 +43,8 @@ class Dice:
         except AttributeError:
             return None
 
-
-class DicePool(Dice):
+#  Various functions that handle / modify the Dice Pool. 
+class DicePool(Dice):#  Innitiates Dice class to DicePool to allow use of the variables
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
 
@@ -61,15 +62,15 @@ class DicePool(Dice):
                 else:
                     break
             
-            DiceMainS.append(var1)  # appends var1 as the Dice Type to DieType (List)
-            DiceMainC.append(var2)  # appends var2 as the Dice ROlls to DieCount (List)
+            DiceMainS.append(var1)  # adds var1 to DiceMainS list
+            DiceMainC.append(var2)  # adds var2 to DiceMainC list
             UniqueCount = input('Add another set? Y / N: ')
             count += 1
             if UniqueCount == 'N' or UniqueCount == 'n':
                     break
-            else:
-                print('invalid option selected. Rolling dice selected so far')
-            print()
+        else:
+            print('invalid option selected. Rolling dice selected so far')
+        print()
 
     def print_pool(self):
         for i, v in zip(self.DiceAmount(), self.DiceType()):
@@ -89,10 +90,11 @@ class DicePool(Dice):
             print('Cleared the Roll History.')
 
 
+#  Action to Roll stored Dice
 def RollTheDice(o):
-                global SetCount
+                global SetCount #  Sets the SetCount to the Global Variable (Starts as 1)
                 from random import randint
-                for dCount, dType in zip(o.DiceAmount(), o.DiceType()):
+                for dCount, dType in zip(o.DiceAmount(), o.DiceType()):#  sets the function variables for the amount of rolls and dice size from DiceAmount and DiceType from Class Dice()
                         print(f'Rolling for {dCount}d{dType}')
                         count = 1
                         #total = 0
@@ -103,9 +105,11 @@ def RollTheDice(o):
                                 RollHistory.append(varHist)
                                 count += 1
                         print()
-                SetCount += 1
+                SetCount += 1 #  Increases Setcount by 1 when the roll is finished to increase the value of the next set count. 
 
 
+#  Call this to pass Dice details and set their types as per class - Dice().
+#  When adding an argument here ensure to initiate it in Dice() as well. 
 def PassingList():
     a0 = DicePool(DiceAmount=DiceMainC, DiceType=DiceMainS, DiceHist=RollHistory)
     return a0
