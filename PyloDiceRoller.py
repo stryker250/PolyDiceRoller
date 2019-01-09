@@ -17,7 +17,7 @@ def Menu():
         x = input('Choice: ')
         if x == '1':
             print()
-            DicePool.StoreDiceToRoll(True)
+            DicePool.StoreDiceToRoll(PassingList())
             input('Press any key to Continue')
         elif x == '2':
             print()

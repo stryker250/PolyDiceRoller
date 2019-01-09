@@ -5,6 +5,7 @@
 DiceMainS = [] #  Global variable used to keep DiceSize state while not cleared
 DiceMainC = [] #  Global variable used to keep DiceCount state while not cleared
 RollHistory = [] #  Global variable used to keep Dthe history of rolls
+# RollHistory data format: [DiceType, Roll Result, The Roll Count (ie roll 1 / roll 2 etc), the set count (ie: Roll set 1 would be the first dice or die rolled)]
 SetCount = 1 #  used to itterate the set counts while roll history is not cleared
 
 
@@ -79,6 +80,7 @@ class DicePool(Dice):#  Innitiates Dice class to DicePool to allow use of the va
     def print_history(self):
         for i, v, c, x in self.DiceHist():
             print(f'Set{x}: d{i}, roll {c}: {v}')
+        print()
 
     def ClearDicePool(self):
             del DiceMainC[:]
