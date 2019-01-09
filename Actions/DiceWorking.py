@@ -79,7 +79,6 @@ class DicePool(Dice):#  Innitiates Dice class to DicePool to allow use of the va
             print(f'{i}d{v}')
 
     def print_history(self):
-        print(*self.DiceHist())
         for key, group in groupby(self.DiceHist(), key=itemgetter(1)):
             print()
             print(f'Starting with set {key}:')
