@@ -79,14 +79,44 @@ class DicePool(Dice):#  Innitiates Dice class to DicePool to allow use of the va
             print(f'{i}d{v}')
 
     def print_history(self):
-        for key, group in groupby(self.DiceHist(), key=itemgetter(1)):
+
+        #  way 1
+        # for key, group in groupby(self.DiceHist(), key=itemgetter(1)):
+        #     print()
+        #     print(f'Starting with set {key}:')
+        #     print()
+        #     for item in group:
+        #         unpack_item0 =[item[0]]
+        #         for a, b, c in unpack_item0:
+        #             print(f'd{a} roll {c} result: {b}')
+        #  way 2
+        # count = 1
+        # for Result, Set in self.DiceHist(): 
+        #     Display_Results =[ [x, v] for x, v  in self.DiceHist() if v == count] 
+        #     if len(Display_Results) != 0:
+        #         print()
+        #         print(f'Set {count}')
+        #         for Results, Set in Display_Results:
+        #             finalout = [Results]
+        #             for a,b,c in finalout:
+        #                 print(f'd{a}, roll {c} :{b}')
+        #         print()
+        #         count += 1
+        #     else:
+        #         break
+        #  Way 3
+        ResultList = dict()
+        for res, n in self.DiceHist():
+            ResultList[n] = ResultList.get(n, []) + [res]
+
+        for k, v in ResultList.items():
             print()
-            print(f'Starting with set {key}:')
+            print(f'Results of Set {k}:')
+            Results = v
+            for a,b,c in Results:
+                print(f'd{a}, roll{c} = {b}')
             print()
-            for item in group:
-                unpack_item0 =[item[0]]
-                for a, b, c in unpack_item0:
-                    print(f'd{a} roll {c} result: {b}')
+
 
 
     def ClearDicePool(self):
