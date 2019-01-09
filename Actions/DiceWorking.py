@@ -93,7 +93,7 @@ def RollTheDice(o):
                 for dCount, dType in zip(o.DiceAmount(), o.DiceType()):
                         print(f'Rolling for {dCount}d{dType}')
                         count = 1
-                        total = 0
+                        #total = 0
                         while dCount >= count:
                                 RollValue = randint(1, dType)
                                 print(f'Roll {count} : {RollValue}')
