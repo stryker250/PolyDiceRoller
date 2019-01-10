@@ -123,6 +123,8 @@ def RollTheDice(o):
 def PassingList():
     DiceCount=str()
     with open('Actions/DiceMainC.txt','a+') as WritetoFile:
+        pass
+    with open('Actions/DiceMainC.txt','r+') as WritetoFile:
         for l in WritetoFile:
             DiceCount=l
     Dicelist = [int(x) for x in DiceCount.split()]
