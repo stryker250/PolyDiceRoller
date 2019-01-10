@@ -2,6 +2,7 @@
 # Copyright 2019 RaptorRants
 from itertools import groupby
 from operator import itemgetter
+
 #  Global Variables
 DiceMainS = [] #  Global variable used to keep DiceSize state while not cleared
 DiceMainC = [] #  Global variable used to keep DiceCount state while not cleared
@@ -51,59 +52,36 @@ class DicePool(Dice):#  Innitiates Dice class to DicePool to allow use of the va
         super().__init__(**kwargs)
 
     def StoreDiceToRoll(self):
-        UniqueCount = 'Y'
-        print("Provide your die rolls in format diecount diesize (Example: 2 12 is 2d12)")
-        count = 1
-        while UniqueCount == 'Y' or UniqueCount == 'y':
-            while True:
-                try:
-                    var2, var1 = [int(x) for x in input(f"Enter details of roll {count}: ").split()]  # var1 and var2 will be passed as DieType nad DieSize. This value is swopped in this line to capture rolls before size but will be passed as Size/Rolls later to ensure the first variable is passed to dict as a unique key
-                except ValueError:
-                    print('Invalid dice selection. Try again')
+        #multiple dice
+        while True:
+            try:
+                #  takes an input such as 1d12 and replaces the d with a space and then splits the 1 and 2 in to a dicecount and dice size
+                Dicelist = [int(x) for x in input(f"Enter details of roll: ").replace('d', ' ').split()]
+                lengthcheck =len(Dicelist)
+                print(lengthcheck)
+                if not lengthcheck%2:
+                    var1 = [int(x) for x in Dicelist[0::2]]
+                    var2 = [int(x) for x in Dicelist[1::2]]
+                    for i in var1: DiceMainC.append(i)
+                    for v in var2: DiceMainS.append(v)
+                else: 
+                    print('You seem to have left a value off of one of your rolls')
                     continue
-                else:
-                    break
-            
-            DiceMainS.append(var1)  # adds var1 to DiceMainS list
-            DiceMainC.append(var2)  # adds var2 to DiceMainC list
-            UniqueCount = input('Add another set? Y / N: ')
-            count += 1
-            if UniqueCount == 'N' or UniqueCount == 'n':
-                    break
-        else:
-            print('invalid option selected. Rolling dice selected so far')
-        print()
+            except ValueError:
+                print('Oops, try it in the standard naming format. Example: 1d12.')
+                print('if you wish you may exclude the d so that it is 1 12')
+                continue
+            else:
+                break
+
+
+       
 
     def print_pool(self):
         for i, v in zip(self.DiceAmount(), self.DiceType()):
             print(f'{i}d{v}')
 
-    def print_history(self):
-
-        #  way 1
-        # for key, group in groupby(self.DiceHist(), key=itemgetter(1)):
-        #     print()
-        #     print(f'Starting with set {key}:')
-        #     print()
-        #     for item in group:
-        #         unpack_item0 =[item[0]]
-        #         for a, b, c in unpack_item0:
-        #             print(f'd{a} roll {c} result: {b}')
-        #  way 2
-        # count = 1
-        # for Result, Set in self.DiceHist(): 
-        #     Display_Results =[ [x, v] for x, v  in self.DiceHist() if v == count] 
-        #     if len(Display_Results) != 0:
-        #         print()
-        #         print(f'Set {count}')
-        #         for Results, Set in Display_Results:
-        #             finalout = [Results]
-        #             for a,b,c in finalout:
-        #                 print(f'd{a}, roll {c} :{b}')
-        #         print()
-        #         count += 1
-        #     else:
-        #         break
+    
         #  Way 3
         ResultList = dict()
         for res, n in self.DiceHist():
@@ -154,7 +132,3 @@ def RollTheDice(o):
 def PassingList():
     a0 = DicePool(DiceAmount=DiceMainC, DiceType=DiceMainS, DiceHist=RollHistory)
     return a0
-
-
-
-
