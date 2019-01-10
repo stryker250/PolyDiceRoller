@@ -11,7 +11,6 @@ RollHistory = [] #  Global variable used to keep Dthe history of rolls
 SetCount = 0 #  used to itterate the set counts while roll history is not cleared
 
 
-
 #  Innitiates Dice variable details such as Dice Size, Amount of Dice and the history of the dice
 class Dice:
     def __init__(self, **kwargs):
@@ -46,6 +45,7 @@ class Dice:
         except AttributeError:
             return None
 
+
 #  Various functions that handle / modify the Dice Pool. 
 class DicePool(Dice):#  Innitiates Dice class to DicePool to allow use of the variables
     def __init__(self, **kwargs):
@@ -58,8 +58,7 @@ class DicePool(Dice):#  Innitiates Dice class to DicePool to allow use of the va
                 #  takes an input such as 1d12 and replaces the d with a space and then splits the 1 and 2 in to a dicecount and dice size
                 Dicelist = [int(x) for x in input(f"Enter details of roll: ").replace('d', ' ').split()]
                 lengthcheck =len(Dicelist)
-                print(lengthcheck)
-                if not lengthcheck%2:
+                if not lengthcheck%2: #  if the amount of items in the list being passed is divisible by 0 then append the data, else throw away, try again
                     var1 = [int(x) for x in Dicelist[0::2]]
                     var2 = [int(x) for x in Dicelist[1::2]]
                     for i in var1: DiceMainC.append(i)
@@ -73,9 +72,6 @@ class DicePool(Dice):#  Innitiates Dice class to DicePool to allow use of the va
                 continue
             else:
                 break
-
-
-       
 
     def print_pool(self):
         for i, v in zip(self.DiceAmount(), self.DiceType()):
@@ -94,8 +90,6 @@ class DicePool(Dice):#  Innitiates Dice class to DicePool to allow use of the va
             for a,b,c in Results:
                 print(f'd{a}, roll{c} = {b}')
             print()
-
-
 
     def ClearDicePool(self):
             del DiceMainC[:]
