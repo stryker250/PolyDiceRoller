@@ -57,9 +57,7 @@ class DicePool(Dice):#  Innitiates Dice class to DicePool to allow use of the va
                 Dicelist = [int(x) for x in input(f"Enter details of roll: ").replace('d', ' ').split()]
                 lengthcheck =len(Dicelist)
                 if not lengthcheck%2: #  if the amount of items in the list being passed is divisible by 0 then append the data, else throw away, try again
-                    var1 = [x for x in Dicelist[0::2]]
-                    var2 = [x for x in Dicelist[1::2]]
-                    with open('Actions/DiceMainC.txt','a+') as WritetoFile, open('Actions/DiceMainS.txt','a+') as WritetoFile2:
+                    with open('Actions/DiceMainC.txt','a+') as WritetoFile:
                         for i in Dicelist: 
                             WritetoFile.write(str(i))
                             WritetoFile.write(' ')                  
@@ -124,8 +122,7 @@ def RollTheDice(o):
 #  When adding an argument here ensure to initiate it in Dice() as well. 
 def PassingList():
     DiceCount=str()
-    DiceSize=[]
-    with open('Actions/DiceMainC.txt','r') as WritetoFile:
+    with open('Actions/DiceMainC.txt','a+') as WritetoFile:
         for l in WritetoFile:
             DiceCount=l
     Dicelist = [int(x) for x in DiceCount.split()]
