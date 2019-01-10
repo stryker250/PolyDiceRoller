@@ -77,7 +77,7 @@ class DicePool(Dice):#  Innitiates Dice class to DicePool to allow use of the va
         for i, v in zip(self.DiceAmount(), self.DiceType()):
             print(f'{i}d{v}')
 
-    
+    def print_history(self):
         #  Way 3
         ResultList = dict()
         for res, n in self.DiceHist():
