@@ -1,5 +1,5 @@
 .vscode/
 .vscode/settings.json
-.gitignore
 __pycache__/
 Actions/DiceMainC.txt
+.gitignore
