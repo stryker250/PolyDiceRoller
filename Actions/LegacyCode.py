@@ -58,3 +58,13 @@
         #         count += 1
         #     else:
         #         break
+
+
+
+        # with open('Actions/DiceMainC.txt','a+') as WritetoFile, open('Actions/DiceMainS.txt','a+') as WritetoFile2:
+        #                     for i in var1: 
+        #                         WritetoFile.write(str(i))
+        #                         WritetoFile.write(' ')
+        #                     for i in var2: 
+        #                         WritetoFile2.write(str(i))
+        #                         WritetoFile2.write(' ')
