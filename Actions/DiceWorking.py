@@ -95,6 +95,7 @@ class DicePool(Dice):#  Innitiates Dice class to DicePool to allow use of the va
 
     def ClearHistory(self):
             del RollHistory[:]
+            with open('Actions/History.txt','w+'): pass
             global SetCount
             SetCount = 0
             print('Cleared the Roll History.')
@@ -112,6 +113,8 @@ def RollTheDice(o):
                     RollValue = randint(1, dType)
                     print(f'Roll {count} : {RollValue}')
                     varHist = [[dType, RollValue, count], SetCount+1]
+                    with open('Actions/History.txt','a+') as varHistWrite:
+                        print(f'{SetCount+1}:{dType},{RollValue},{count}', file=varHistWrite)
                     RollHistory.append(varHist)
                     count += 1
             print()
