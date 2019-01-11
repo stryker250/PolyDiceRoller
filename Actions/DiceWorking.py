@@ -76,6 +76,17 @@ class DicePool(Dice):#  Innitiates Dice class to DicePool to allow use of the va
             print(f'{i}d{v}')
 
     def print_history(self):
+       #  will use the below commented once ready to read from file. 
+       # Effectilvey i will be the line number. E
+       # each line number will indicate a set and then v will be values that are represented on the line (Split in complex lists)
+        # v will need to somehow be read in and unpacked to get each seperate value. 
+        # format of a line:
+        #['3:20,1,19', '3:5,1,4']
+        #['setnumber: DiceSize, RollNumber, Result', 'setnumber: DiceSize, RollNumber, Result']
+        # value tt will effectively be the read from file in a readable format to the program
+        # for i,v in enumerate(tt,1):
+        #     print(f'{i}:{v}')
+
         #  Way 3
         ResultList = dict()
         for res, n in self.DiceHist():
