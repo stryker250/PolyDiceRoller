@@ -103,6 +103,7 @@ class DicePool(Dice):#  Innitiates Dice class to DicePool to allow use of the va
 
 #  Action to Roll stored Dice
 def RollTheDice(o):
+    RollPass = []
     global SetCount #  Sets the SetCount to the Global Variable (Starts as 1)
     from random import randint
     for dCount, dType in zip(o.DiceAmount(), o.DiceType()):#  sets the function variables for the amount of rolls and dice size from DiceAmount and DiceType from Class Dice()
@@ -112,13 +113,18 @@ def RollTheDice(o):
             while dCount >= count:
                     RollValue = randint(1, dType)
                     print(f'Roll {count} : {RollValue}')
-                    varHist = [[dType, RollValue, count], SetCount+1]
-                    with open('Actions/History.txt','a+') as varHistWrite:
-                        print(f'{SetCount+1}:{dType},{RollValue},{count}', file=varHistWrite)
+                    varHist = ([dType, RollValue, count], SetCount+1)
+                    # with open('Actions/History.txt','a+') as varHistWrite:
+                    #     print(f'{SetCount+1}:{dType},{RollValue},{count}', file=varHistWrite)
                     RollHistory.append(varHist)
+                    RollPass.append(f'{SetCount+1}:{dType},{count},{RollValue}')
                     count += 1
-            print()
-    SetCount += 1 #  Increases Setcount by 1 when the roll is finished to increase the value of the next set count. 
+    if RollPass:
+        with open('Actions/History.txt','a+') as varHistWrite:
+                print(f'{RollPass}', file=varHistWrite)
+                print()
+                RollPass=[]
+                SetCount += 1 #  Increases Setcount by 1 when the roll is finished to increase the value of the next set count. 
 
 
 #  Call this to pass Dice details and set their types as per class - Dice().
@@ -131,7 +137,7 @@ def PassingList():
         for l in WritetoFile:
             DiceCount=l
     Dicelist = [int(x) for x in DiceCount.split()]
-    DiceC = [x for x in Dicelist[0::2]]
-    DiceS = [x for x in Dicelist[1::2]]
+    DiceC = [int(x) for x in Dicelist[0::2]]
+    DiceS = [int(x) for x in Dicelist[1::2]]
     a0 = DicePool(DiceAmount=DiceC, DiceType=DiceS, DiceHist=RollHistory)
     return a0
