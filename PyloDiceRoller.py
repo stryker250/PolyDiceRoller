@@ -34,13 +34,16 @@ def Menu():
         elif x == '5':
             print()
             DicePool.ClearDicePool(True)
+            print('Dice Pool cleared....')
             input('Press Enter to Continue')
         elif x == '6':
             print()
             DicePool.ClearHistory(True)
+            print('Dice History cleared....')
             input('Press Enter to Continue')
         elif x == '9':
             print()
+            DicePool.ClearDicePool(True)
             break
         else:
             print()

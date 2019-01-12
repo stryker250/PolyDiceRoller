@@ -143,13 +143,11 @@ class DicePool(Dice):#  Innitiates Dice class to DicePool to allow use of the va
 
     def ClearDicePool(self):
             with open('Actions/DiceMainC.txt','w'): pass
-            print('Cleared the Dice Pool. You have no dice assigned. History will be kept.')
 
     def ClearHistory(self):
 #            del RollHistory[:]
             with open('Actions/History.txt','w+'): pass
 #            global SetCount
  #           SetCount = 0
-            print('Cleared the Roll History.')
 
 
