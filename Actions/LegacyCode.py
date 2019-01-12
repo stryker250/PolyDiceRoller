@@ -59,6 +59,18 @@
         #     else:
         #         break
 
+        #  Way 3
+        # ResultList = dict()
+        # for res, n in self.DiceHist():
+        #     ResultList[n] = ResultList.get(n, []) + [res]
+
+        # for k, v in ResultList.items():
+        #     print()
+        #     print(f'Results of Set {k}:')
+        #     Results = v
+        #     for a,b,c in Results:
+        #         print(f'd{a}, roll{c} = {b}')
+        #     print()
 
 
         # with open('Actions/DiceMainC.txt','a+') as WritetoFile, open('Actions/DiceMainS.txt','a+') as WritetoFile2:

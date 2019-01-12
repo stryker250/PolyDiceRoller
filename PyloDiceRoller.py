@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 # Copyright 2018 - RaptorRants
-from Actions.DiceWorking import DicePool, RollTheDice, PassingList
+from Actions.DiceWorking import DicePool, WorkTheDice
 import os
 
 def Menu():
@@ -17,19 +17,19 @@ def Menu():
         x = input('Choice: ')
         if x == '1':
             print()
-            DicePool.StoreDiceToRoll(PassingList())
+            DicePool.StoreDiceToRoll(DicePool.PassingList(x))
             input('Press Enter to Continue')
         elif x == '2':
             print()
-            DicePool.print_pool(PassingList())
+            WorkTheDice.print_pool(DicePool.PassingList(x))
             input('Press Enter to Continue')
         elif x == '3':
             print()
-            RollTheDice(PassingList())
+            WorkTheDice.RollTheDice(DicePool.PassingList(x))
             input('Press Enter to Continue')
         elif x == '4':
             print()
-            DicePool.print_history(PassingList())
+            WorkTheDice.print_history(DicePool.PassingList(x))
             input('Press Enter to Continue')
         elif x == '5':
             print()
