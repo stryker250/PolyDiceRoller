@@ -4,9 +4,9 @@ from itertools import groupby
 from operator import itemgetter
 
 #  Global Variables
-RollHistory = [] #  Global variable used to keep Dthe history of rolls
-# RollHistory data format: [DiceType, Roll Result, The Roll Count (ie roll 1 / roll 2 etc), the set count (ie: Roll set 1 would be the first dice or die rolled)]
-SetCount = 0 #  used to itterate the set counts while roll history is not cleared
+RollHistory = []  # Global variable used to keep Dthe history of rolls
+#  RollHistory data format: [DiceType, Roll Result, The Roll Count (ie roll 1 / roll 2 etc), the set count (ie: Roll set 1 would be the first dice or die rolled)]
+SetCount = 0  # used to itterate the set counts while roll history is not cleared
 
 
 #  Innitiates Dice variable details such as Dice Size, Amount of Dice and the history of the dice
