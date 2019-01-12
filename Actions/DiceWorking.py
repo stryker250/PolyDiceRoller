@@ -4,9 +4,9 @@ from itertools import groupby
 from operator import itemgetter
 
 #  Global Variables
-RollHistory = []  # Global variable used to keep Dthe history of rolls
+#RollHistory = []  # Global variable used to keep Dthe history of rolls
 #  RollHistory data format: [DiceType, Roll Result, The Roll Count (ie roll 1 / roll 2 etc), the set count (ie: Roll set 1 would be the first dice or die rolled)]
-SetCount = 0  # used to itterate the set counts while roll history is not cleared
+#SetCount = 0  # used to itterate the set counts while roll history is not cleared
 
 
 #  Innitiates Dice variable details such as Dice Size, Amount of Dice and the history of the dice
@@ -48,8 +48,9 @@ class WorkTheDice(Dice):
     def RollTheDice(self):
         from random import randint
         RollPass = []
-        global SetCount #  Sets the SetCount to the Global Variable (Starts as 1)
-        date=str('1/12/12')
+       # global SetCount #  Sets the SetCount to the Global Variable (Starts as 1)
+        import datetime
+        date=str(datetime.datetime.today().strftime('%Y/%m/%d----%H:%M:%S'))
         for dCount, dType in zip(self.DiceAmount(), self.DiceType()):#  sets the function variables for the amount of rolls and dice size from DiceAmount and DiceType from Class Dice()
                 if RollPass:
                     pass
@@ -64,12 +65,12 @@ class WorkTheDice(Dice):
                         print(f'Roll {count} : {RollValue}')
                         # varHist = ([dType, RollValue, count], SetCount+1)
                         # RollHistory.append(varHist)
-                        RollPass.append(f'{SetCount+1}:{dType},{count},{RollValue}')
+                        RollPass.append(f'{dType},{count},{RollValue}')
                         if RollPass:
                             with open('Actions/History.txt','a+') as varHistWrite:
                                 print(f'{dType} {count} {RollValue}',end=" ", file=varHistWrite)
                         count += 1
-                SetCount+=1
+                #SetCount+=1
         if RollPass:
                 with open('Actions/History.txt','a') as varHistWrite:
                     print(f'',file=varHistWrite)
@@ -78,7 +79,6 @@ class WorkTheDice(Dice):
             print(f'{i}d{v}')
 
     def print_history(self):
-        print(self)
         unpack = dict(self.DiceHist())
         for k, v in unpack.items():
             print(f'set {k}')
@@ -146,10 +146,10 @@ class DicePool(Dice):#  Innitiates Dice class to DicePool to allow use of the va
             print('Cleared the Dice Pool. You have no dice assigned. History will be kept.')
 
     def ClearHistory(self):
-            del RollHistory[:]
+#            del RollHistory[:]
             with open('Actions/History.txt','w+'): pass
-            global SetCount
-            SetCount = 0
+#            global SetCount
+ #           SetCount = 0
             print('Cleared the Roll History.')
 
 
