@@ -103,6 +103,8 @@ class DicePool(Dice):#  Innitiates Dice class to DicePool to allow use of the va
     def PassingList(self):
         DiceCount=str()
         ResultList=dict()
+        with open('Actions/History.txt','a+') as varHistWrite:
+            pass
         with open('Actions/History.txt','r') as varHistWrite:
             for n, res in enumerate(varHistWrite, 1):
                 ResultList[n] = ResultList.get(n, []) + [res.rstrip()]
