@@ -3,7 +3,7 @@
 from Actions.DiceWorking import DicePool, WorkTheDice
 import os
 
-def Menu():
+def main():
     while True:
         os.system('cls' if os.name == 'nt' else 'clear')
         print('1: Add Dice to Rolling Pool')
@@ -50,4 +50,4 @@ def Menu():
             print('Please choose a valid option')
             print()
 
-if __name__ == "__main__": Menu()
+if __name__ == "__main__": main()
