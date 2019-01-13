@@ -60,13 +60,12 @@ class DicePool(Dice):
         return a0
     
     def StoreDiceToRoll(self):
-        #multiple dice
         while True:
             try:
                 #  takes an input such as 1d12 and replaces the d with a space and then splits the 1 and 2 in to a dicecount and dice size
                 Dicelist = [int(x) for x in input(f"Enter details of roll: ").replace('d', ' ').split()]
                 lengthcheck =len(Dicelist)
-                if not lengthcheck%2: #  if the amount of items in the list being passed is divisible by 0 then append the data, else throw away, try again
+                if not lengthcheck%2: # Checks that list length is an even number
                     with open('DiceStore/DiceMainC.txt','a+') as WritetoFile:
                         for i in Dicelist: 
                             WritetoFile.write(str(i))
@@ -89,6 +88,8 @@ class DicePool(Dice):
 
 class WorkTheDice:
     def RollTheDice(self):
+        print(f'{self.Name()} is')
+        names = self.Name()
         self = DicePool.PassTheDice(self)
         from random import randint
         RollPass = []
@@ -100,7 +101,7 @@ class WorkTheDice:
                     pass
                 else: 
                     with open('Saves/History.txt','a+') as varHistWrite:
-                        print(f'{date}',end=" ", file=varHistWrite)
+                        print(f'{date} {names}',end=" ", file=varHistWrite)
                 print(f'Rolling for {dCount}d{dType}')
                 count = 1
                 #total = 0
@@ -124,7 +125,51 @@ class WorkTheDice:
 #         print(f'The d{self.DiceType()} is Rolled "{self.DiceAmount()}" times by {self.Name()}"')
 
 def main():
-    a1= DicePool(Name='Llew')
-    WorkTheDice.RollTheDice(a1)
+    # a1= DicePool(Name='Llew') # Reminder code as I want to pass a player name. 
+    # WorkTheDice.RollTheDice(a1)
+    while True:
+        import os
+        os.system('cls' if os.name == 'nt' else 'clear')
+        print('1: Add Dice to Rolling Pool')
+        print('2: View Rolling Pool')
+        print('3: View Roll History')
+        print('4: Roll them baby!')
+        print('5: Clear Dice Pool')
+        print('6: Clear roll history')
+        print('9: Exit')
+
+        x = input('Choice: ')
+        if x == '1':
+            print()
+            input('Press Enter to Continue')
+        elif x == '2':
+            print()
+            input('Press Enter to Continue')
+        elif x == '3':
+            print()
+            input('Press Enter to Continue')
+        elif x == '4':
+            print()
+            player_name=input('Enter the name of the Character Rolling: ')
+            a1= DicePool(Name=player_name)
+            WorkTheDice.RollTheDice(a1)
+            input('Press Enter to Continue')
+        elif x == '5':
+            print()
+            print('Dice Pool cleared....')
+            input('Press Enter to Continue')
+        elif x == '6':
+            print()
+            print('Dice History cleared....')
+            input('Press Enter to Continue')
+        elif x == '9':
+            print()
+            break
+        else:
+            print()
+            print('Please choose a valid option')
+            print()
+            
+    
 
 if __name__ == '__main__': main()
