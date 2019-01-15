@@ -63,8 +63,6 @@ class WorkTheDice(Dice):
                 while dCount >= count:
                         RollValue = randint(1, dType)
                         print(f'Roll {count} : {RollValue}')
-                        # varHist = ([dType, RollValue, count], SetCount+1)
-                        # RollHistory.append(varHist)
                         RollPass.append(f'{dType},{count},{RollValue}')
                         if RollPass:
                             with open('Actions/History.txt','a+') as varHistWrite:
