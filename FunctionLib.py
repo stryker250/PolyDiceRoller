@@ -54,16 +54,16 @@ class DicePool:
         from random import randint
         import datetime
         RollPass=[]
-        date=str(datetime.datetime.today().strftime('%Y/%m/%d----%H:%M:%S'))
+        
         if not a.DicePoolSet:
             print('Please add Dice to your pool to roll them.')
         else:
             for dCount, dType in zip(a.DicePoolSet.DiceAmount(), a.DicePoolSet.DiceType()):
-                if RollPass:
+                if RollPass: # if RollPass has data it does not append a new date
                     pass
-                else: 
-                    with open('Saves/History.txt','a+') as varHistWrite:
-                        print(f'{date}',end=" ", file=varHistWrite)
+                else: #if RollPass has no data then it sets a date to the beginning of the line for the roll
+                    setDate = DiceStorage()
+                    setDate.storeHistory(a= 0, b=1)
                 print(f'Rolling for {dCount}d{dType}')
                 count = 1
                 while dCount >= count:
@@ -72,12 +72,12 @@ class DicePool:
                         RollPass.append(f'{dType},{count},{RollValue}')
                         if RollPass:
                             PassToHistory=DiceStorage(DiceType=dType, DiceAmount=count)
-                            PassToHistory.storeHistory(RollValue)
+                            PassToHistory.storeHistory(RollValue, b=2)
                         count += 1
-        if RollPass:
-                with open('Saves/History.txt','a') as varHistWrite:
-                    print(f'',file=varHistWrite)
-        return RollPass
+        if RollPass: #if RollPass has data, it sets a new line after the roll details have finished writing to file.
+            newLine = DiceStorage()
+            newLine.storeHistory(a= 0, b=3)
+        return RollPass #returns the value of rollpass to the function so it can be read by the display functions to show the results. 
         
 
 class DiceStorage(Dice):
@@ -85,14 +85,22 @@ class DiceStorage(Dice):
     def storeDicePool(self):
         pass
 
-    def storeHistory(self, a):
+    def storeHistory(self, a, b):
         import datetime
+        date=str(datetime.datetime.today().strftime('%Y/%m/%d----%H:%M:%S'))
         dType=self.DiceType()
         count= self.DiceAmount()
         RollValue=a
-
-        with open('Saves/History.txt','a+') as varHistWrite:
-            print(f'{dType} {count} {RollValue}',end=" ", file=varHistWrite)
+        if b == 1:
+            with open('Saves/History.txt','a+') as varHistWrite:
+                            print(f'{date}',end=" ", file=varHistWrite)
+        elif b == 2:
+            with open('Saves/History.txt','a+') as varHistWrite:
+                print(f'{dType} {count} {RollValue}',end=" ", file=varHistWrite)
+        elif b == 3:
+            with open('Saves/History.txt','a') as varHistWrite:
+                print(f'',file=varHistWrite)
+        
         # with open('Saves/History.txt','a') as varHistWrite:
         #             print(f'',file=varHistWrite)
 
