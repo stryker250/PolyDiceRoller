@@ -110,6 +110,8 @@ class DiceStorage(Dice):
         dType=self.DiceType()
         count= self.DiceAmount()
         RollValue=a
+        with open('Saves/History.txt','r+'):
+            pass
         if b == 1:
             with open('Saves/History.txt','a+') as varHistWrite:
                             print(f'{date}',end=" ", file=varHistWrite)
