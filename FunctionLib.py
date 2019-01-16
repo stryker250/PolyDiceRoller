@@ -77,13 +77,32 @@ class DicePool:
         if RollPass: #if RollPass has data, it sets a new line after the roll details have finished writing to file.
             newLine = DiceStorage()
             newLine.storeHistory(a= 0, b=3)
-        return RollPass #returns the value of rollpass to the function so it can be read by the display functions to show the results. 
+        #return RollPass #returns the value of rollpass to the function so it can be read by the display functions to show the results. 
         
 
 class DiceStorage(Dice):
 
-    def storeDicePool(self):
-        pass
+    def storeDicePool(self, a):
+        Dicelist = a
+        with open('DiceStore/DicePool.txt','r+'):
+            pass
+        while True: #Loops the input until valid input is given.
+            try:
+                lengthcheck =len(Dicelist)
+                if not lengthcheck%2: #  variable lenght must be even or it throws an error. 
+                    with open('DiceStore/DicePool.txt','a+') as WritetoFile:
+                        for i in Dicelist: 
+                            WritetoFile.write(str(i))
+                            WritetoFile.write(' ')                  
+                else: 
+                    print('You seem to have left a value off of one of your rolls')
+                    continue
+            except ValueError:
+                print('Oops, try it in the standard naming format. Example: 1d12.')
+                print('if you wish you may exclude the d so that it is 1 12')
+                continue
+            else:
+                break
 
     def storeHistory(self, a, b):
         import datetime
@@ -128,6 +147,9 @@ def main():
 
         x = input('Enter the menu number you require: ')
         if x == '1':
+            menuitem= DiceStorage
+            Dicelist = [int(x) for x in input(f"Enter details of roll: ").replace('d', ' ').split()]
+            menuitem.storeDicePool(x, a=Dicelist)
             print()
         elif x == '2':
             print()
