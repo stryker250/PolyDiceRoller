@@ -48,34 +48,36 @@ class Dice:
 
 #  Action to Roll stored Dice
 class WorkTheDice(Dice):
+
     def RollTheDice(self):
         RollPass = []
-       # global SetCount #  Sets the SetCount to the Global Variable (Starts as 1)
+        # global SetCount #  Sets the SetCount to the Global Variable (Starts as 1)
 
         date=str(datetime.datetime.today().strftime('%Y/%m/%d----%H:%M:%S'))
         for dCount, dType in zip(self.DiceAmount(), self.DiceType()):#  sets the function variables for the amount of rolls and dice size from DiceAmount and DiceType from Class Dice()
+            if RollPass:
+                pass
+            else:
+                with open('Actions/History.txt','a+') as varHistWrite:
+                    print(f'{date}',end=" ", file=varHistWrite)
+            print(f'Rolling for {dCount}d{dType}')
+            count = 1
+            #total = 0
+            while dCount >= count:
+                RollValue = randint(1, dType)
+                print(f'Roll {count} : {RollValue}')
+                # varHist = ([dType, RollValue, count], SetCount+1)
+                # RollHistory.append(varHist)
+                RollPass.append(f'{dType},{count},{RollValue}')
                 if RollPass:
-                    pass
-                else: 
                     with open('Actions/History.txt','a+') as varHistWrite:
-                        print(f'{date}',end=" ", file=varHistWrite)
-                print(f'Rolling for {dCount}d{dType}')
-                count = 1
-                #total = 0
-                while dCount >= count:
-                        RollValue = randint(1, dType)
-                        print(f'Roll {count} : {RollValue}')
-                        # varHist = ([dType, RollValue, count], SetCount+1)
-                        # RollHistory.append(varHist)
-                        RollPass.append(f'{dType},{count},{RollValue}')
-                        if RollPass:
-                            with open('Actions/History.txt','a+') as varHistWrite:
-                                print(f'{dType} {count} {RollValue}',end=" ", file=varHistWrite)
-                        count += 1
+                        print(f'{dType} {count} {RollValue}',end=" ", file=varHistWrite)
+                count += 1
                 #SetCount+=1
         if RollPass:
-                with open('Actions/History.txt','a') as varHistWrite:
-                    print(f'',file=varHistWrite)
+            with open('Actions/History.txt','a') as varHistWrite:
+                print(f'',file=varHistWrite)
+
     def print_pool(self):
         for i, v in zip(self.DiceAmount(), self.DiceType()):
             print(f'{i}d{v}')
@@ -96,12 +98,12 @@ class WorkTheDice(Dice):
                 print(f'D{i}, Roll {v} = {x}')
             print()
 
-#  Various functions that handle / modify the Dice Pool. 
+#  Various functions that handle / modify the Dice Pool.
 class DicePool(Dice):#  Innitiates Dice class to DicePool to allow use of the variables
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
 #  Call this to pass Dice details and set their types as per class - Dice().
-#  When adding an argument here ensure to initiate it in Dice() as well. 
+#  When adding an argument here ensure to initiate it in Dice() as well.
     def PassingList(self):
         DiceCount=str()
         ResultList=dict()
@@ -130,10 +132,10 @@ class DicePool(Dice):#  Innitiates Dice class to DicePool to allow use of the va
                 lengthcheck =len(Dicelist)
                 if not lengthcheck%2: #  if the amount of items in the list being passed is divisible by 0 then append the data, else throw away, try again
                     with open('Actions/DiceMainC.txt','a+') as WritetoFile:
-                        for i in Dicelist: 
+                        for i in Dicelist:
                             WritetoFile.write(str(i))
-                            WritetoFile.write(' ')                  
-                else: 
+                            WritetoFile.write(' ')
+                else:
                     print('You seem to have left a value off of one of your rolls')
                     continue
             except ValueError:
@@ -143,15 +145,11 @@ class DicePool(Dice):#  Innitiates Dice class to DicePool to allow use of the va
             else:
                 break
 
-
-
     def ClearDicePool(self):
-            with open('Actions/DiceMainC.txt','w'): pass
+        with open('Actions/DiceMainC.txt','w'): pass
 
     def ClearHistory(self):
-#            del RollHistory[:]
-            with open('Actions/History.txt','w+'): pass
-#            global SetCount
- #           SetCount = 0
-
-
+#       del RollHistory[:]
+        with open('Actions/History.txt','w+'): pass
+#       global SetCount
+#       SetCount = 0
