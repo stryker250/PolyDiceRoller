@@ -2,6 +2,8 @@
 # Copyright 2019 RaptorRants
 from itertools import groupby
 from operator import itemgetter
+from random import randint
+import datetime
 
 #  Global Variables
 #RollHistory = []  # Global variable used to keep Dthe history of rolls
@@ -46,10 +48,9 @@ class Dice:
 #  Action to Roll stored Dice
 class WorkTheDice(Dice):
     def RollTheDice(self):
-        from random import randint
         RollPass = []
        # global SetCount #  Sets the SetCount to the Global Variable (Starts as 1)
-        import datetime
+
         date=str(datetime.datetime.today().strftime('%Y/%m/%d----%H:%M:%S'))
         for dCount, dType in zip(self.DiceAmount(), self.DiceType()):#  sets the function variables for the amount of rolls and dice size from DiceAmount and DiceType from Class Dice()
                 if RollPass:
